@@ -24,13 +24,14 @@ class ProviderResource extends Resource
 {
     protected static ?string $model = Provider::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-identification';
+    protected static ?string $navigationGroup='Shopping';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                
+
                 TextInput::make('name')->required()
                 ->unique(ignoreRecord:true),
                 TextInput::make('nit')->required()
@@ -41,7 +42,7 @@ class ProviderResource extends Resource
                 TextInput::make('phone')->required()
                 ->numeric()
                 ->unique(ignoreRecord:true),
-                
+
 
                 Select::make('department_id')
                 ->label('Department')
@@ -53,17 +54,17 @@ class ProviderResource extends Resource
                 ->label(label: 'City')
                 ->required()
                 ->options( function ( callable $get ) {
-                    
+
                     $department = Department::find( $get('department_id'));
 
                     if($department){
                         return $department->cities->pluck('name', 'id');
                     }
                     return City::all()->pluck('name','id');
-                   
+
 
                 }),
-               
+
                 TextInput::make('address'),
                 TextInput::make('name_contact'),
 
@@ -76,7 +77,7 @@ class ProviderResource extends Resource
     {
         return $table
             ->columns([
-              
+
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('nit')->sortable()->searchable(),
@@ -100,11 +101,11 @@ class ProviderResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageProviders::route('/'),
         ];
-    }    
+    }
 }

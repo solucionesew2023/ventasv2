@@ -28,15 +28,16 @@ class ColorsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
     protected static ?string $navigationGroup='Productos';
+    protected static ?int $navigationSort = 5;
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-               
+
              Card::make()->schema([
                 TextInput::make('name')->required()
                                            ->unique(ignoreRecord:true),
-                    
+
                                            ])
 
             ]);
@@ -46,7 +47,7 @@ class ColorsResource extends Resource
     {
         return $table
             ->columns([
-               
+
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
 
@@ -62,11 +63,11 @@ class ColorsResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageColors::route('/'),
         ];
-    }    
+    }
 }

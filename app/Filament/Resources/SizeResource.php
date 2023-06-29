@@ -21,6 +21,7 @@ class SizeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-scale';
     protected static ?string $navigationGroup='Productos';
+    protected static ?int $navigationSort = 4;
     public static function form(Form $form): Form
     {
         return $form
@@ -28,7 +29,7 @@ class SizeResource extends Resource
                 Card::make()->schema([
                     TextInput::make('name')->required()
                                                ->unique(ignoreRecord:true),
-                        
+
                                                ])
             ]);
     }
@@ -52,11 +53,11 @@ class SizeResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageSizes::route('/'),
         ];
-    }    
+    }
 }

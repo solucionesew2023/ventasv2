@@ -51,6 +51,7 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-gift';
     protected static ?string $navigationGroup='Productos';
+    protected static ?int $navigationSort = 7;
     public static function form(Form $form): Form
     {
         return $form
@@ -65,7 +66,7 @@ class ProductResource extends Resource
                 ->label(label: 'SubCategory')
                 ->required()
                 ->options( function ( callable $get ) {
-                    
+
                     $category = Category::find( $get('category_id'));
 
                     if($category){
@@ -88,7 +89,7 @@ class ProductResource extends Resource
                  ->required()
                  ->options(Tax::all()->pluck(value:'name', key:'id')->toArray()),
        TextInput::make('stock_min')->required()
-                 ->Numeric(), 
+                 ->Numeric(),
        Select::make('status')->required()
                  ->options([
                      'draft' => 'Draft',
@@ -109,20 +110,20 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                
+
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('subcategory.name')->sortable()->searchable(),
                 TextColumn::make('subcategory.category.name')->sortable()->searchable(),
                 TextColumn::make('brand.name')->sortable()->searchable(),
                 TextColumn::make('tax.name')->sortable()->searchable(),
-                
+
                 TextColumn::make('stock_min')->sortable()->searchable(),
-               
+
                 TextColumn::make('status')->sortable()->searchable(),
                 ])
             ->filters([
-                
+
 SelectFilter::make('subcategory')->relationship('subcategory', 'name'),
 
 
@@ -131,24 +132,24 @@ SelectFilter::make('subcategory')->relationship('subcategory', 'name'),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 ExportAction::make()
-                
-                
+
+
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
 
             ExportBulkAction::make()
-    
-             
+
+
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageProducts::route('/'),
         ];
-    } 
-    
-    
+    }
+
+
 }

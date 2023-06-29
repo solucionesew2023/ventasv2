@@ -21,6 +21,7 @@ class TaxResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-folder';
     protected static ?string $navigationGroup='Productos';
+    protected static ?int $navigationSort = 6;
     public static function form(Form $form): Form
     {
         return $form
@@ -30,7 +31,7 @@ class TaxResource extends Resource
                                                ->unique(ignoreRecord:true),
                     TextInput::make('value')->required()
                                            ->Numeric()
-                                           ->Placeholder('19% = 0.19'),    
+                                           ->Placeholder('19% = 0.19'),
                                                ])
             ]);
     }
@@ -54,11 +55,11 @@ class TaxResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageTaxes::route('/'),
         ];
-    }    
+    }
 }

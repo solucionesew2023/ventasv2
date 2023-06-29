@@ -22,6 +22,7 @@ class CategoriesResource extends Resource
     protected static ?string $model = Category::class;
     protected static ?string $navigationGroup='Productos';
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -45,7 +46,7 @@ class CategoriesResource extends Resource
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('slug')->sortable()->searchable(),
-                
+
             ])
             ->filters([
                 //
@@ -58,11 +59,11 @@ class CategoriesResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageCategories::route('/'),
         ];
-    }    
+    }
 }

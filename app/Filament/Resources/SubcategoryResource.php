@@ -2,9 +2,11 @@
 namespace App\Filament\Resources;
 use App\Models\Subcategory;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use App\Filament\Resources\SubcategoryResource\Pages;
 use App\Filament\Resources\SubcategoryResource\RelationManagers;
+use App\Filament\Resources\SubcategoryResource\RelationManagers\ProductsRelationManager;
 
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -28,6 +30,8 @@ class SubcategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
     protected static ?string $navigationGroup='Productos';
+    protected static ?int $navigationSort = 2;
+    protected static ?string $inverseRelationship = 'subcategory';
     public static function form(Form $form): Form
     {
     return $form
@@ -53,7 +57,7 @@ class SubcategoryResource extends Resource
     {
         return $table
             ->columns([
-              
+
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('category.name')->sortable()->searchable(),
@@ -70,11 +74,18 @@ class SubcategoryResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\ProductsRelationManager::class,
+
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageSubcategories::route('/'),
         ];
-    }    
+    }
 }
