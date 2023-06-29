@@ -20,6 +20,7 @@ use Illuminate\Support\Str;
 use App\Filament\Resources\collable;
 use Filament\Tables\Filters\TernaryFilter;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Filament\Resources\SubcategoryResource\RelationManagers\ProductsRelationManager;
 use App\Models\Product;
 
 use App\Models\Category;
@@ -142,6 +143,13 @@ SelectFilter::make('subcategory')->relationship('subcategory', 'name'),
 
 
             ]);
+    }
+    public static function getRelations(): array
+    {
+        return [
+          
+
+        ];
     }
 
     public static function getPages(): array

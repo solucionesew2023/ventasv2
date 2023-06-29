@@ -6,7 +6,7 @@ use App\Models\Product;
 use Illuminate\Support\Str;
 use App\Filament\Resources\SubcategoryResource\Pages;
 use App\Filament\Resources\SubcategoryResource\RelationManagers;
-use App\Filament\Resources\SubcategoryResource\RelationManagers\ProductsRelationManager;
+
 
 use Filament\Forms;
 use Filament\Resources\Form;
