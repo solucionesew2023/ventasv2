@@ -2,12 +2,12 @@
 
 namespace App\Filament\Resources;
 use Filament\Tables\Filters\SelectFilter;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+
 
 
 
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
+
 
 
 
@@ -132,14 +132,14 @@ SelectFilter::make('subcategory')->relationship('subcategory', 'name'),
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                ExportAction::make()
+
 
 
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
 
-            ExportBulkAction::make()
+           
 
 
             ]);
@@ -147,7 +147,7 @@ SelectFilter::make('subcategory')->relationship('subcategory', 'name'),
     public static function getRelations(): array
     {
         return [
-          
+
 
         ];
     }
